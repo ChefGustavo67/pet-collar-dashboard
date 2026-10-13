@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- This line makes the page fit phone screens instead of shrinking -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Max – Pet Health Dashboard</title>
+
+  <style>
+    /* ---------- 1. DESIGN TOKENS ----------
+       Colours and sizes saved as variables so we can reuse them.
+       Change one value here and the whole page updates. */
+    :root {
+      --bg: #eef3f2;
+      --card: #ffffff;
+      --ink: #12302e;
+      --muted: #5d7371;
+      --accent: #1d8a7c;
+      --accent-soft: #d6ece8;
+      --warn: #c9701a;
+      --warn-soft: #fbe9d3;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .page { max-width: 960px; margin: 0 auto; padding: 16px; }
+
+    /* ---------- 2. DEMO BANNER ---------- */
+    .demo-banner {
+      background: var(--warn-soft);
+      color: #7a4208;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    /* ---------- 3. PROFILE ---------- */
+    .profile { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: grid; place-items: center;   /* centres the letter */
+      font-size: 1.8rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .profile h1 { margin: 0; font-size: 1.8rem; line-height: 1.2; }
+    .profile p { margin: 0; color: var(--muted); }
+
+    /* ---------- 4. CARDS + GRID ----------
+       The grid puts cards in columns. "auto-fit" + "minmax" means:
+       as many columns as fit, each at least 200px wide.
+       On a phone that becomes 1 column automatically. */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .card { background: var(--card); border-radius: var(--radius); padding: 20px; }
+    .card h2 { margin: 0 0 8px; font-size: 0.95rem; color: var(--muted); font-weight: 600; }
+    .big { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+    .unit { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .note { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+    /* The one card that matters most gets the accent colour */
+    .score { background: var(--accent); color: #fff; }
+    .score h2, .score .note, .score .unit { color: #d6ece8; }
+
+    /* ---------- 5. BASELINE MESSAGE ---------- */
+    .message {
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      background: var(--accent-soft);
+    }
+    .message.different { background: var(--warn-soft); }
+    .message strong { display: block; font-size: 1.1rem; margin-bottom: 2px; }
+
+    /* ---------- 6. CHART ----------
+       Each day is a column (a flex box). The bar's height is set
+       by JavaScript as a percentage. */
+    .chart {
+      display: flex;
+      align-items: flex-end;     /* bars grow upward from the bottom */
+      gap: 8px;
+      height: 180px;
+      margin-top: 12px;
+    }
+    .day { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+    .bar { width: 100%; max-width: 48px; background: var(--accent-soft); border-radius: 8px 8px 0 0; }
+    .bar.today { background: var(--accent); }
+    .day-value { font-size: 0.8rem; margin-bottom: 4px; }
+    .day-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 16px 0; }
+  </style>
+</head>
+
+<body>
+  <!-- ---------- HTML = the structure (the content on the page) ---------- -->
+  <main class="page">
+
+    <div class="demo-banner">DEMO DATA – these numbers are made up, not real sensor readings.</div>
+
+    <section class="profile">
+      <div class="avatar" aria-hidden="true">M</div>
+      <div>
+        <h1>Max</h1>
+        <p>Labrador · 4 years old · Collar demo-001</p>
+      </div>
+    </section>
+
+    <!-- Message comparing today with the usual baseline (text is filled in by JavaScript) -->
+    <section class="message" id="message" aria-live="polite">
+      <strong id="message-title">Loading…</strong>
+      <span id="message-text"></span>
+    </section>
+
+    <!-- The four stat cards. Numbers are filled in by JavaScript too. -->
+    <section class="grid">
+      <article class="card score">
+        <h2>Activity score today</h2>
+        <div class="big"><span id="score"></span><span class="unit"> / 100</span></div>
+        <p class="note">Higher means more active.</p>
+      </article>
+
+      <article class="card">
+        <h2>Rest time</h2>
+        <div class="big"><span id="rest"></span><span class="unit"> hrs</span></div>
+        <p class="note">Time lying still today.</p>
+      </article>
+
+      <article class="card">
+        <h2>Movement</h2>
+        <div class="big"><span id="steps"></span></div>
+        <p class="note"><span id="distance"></span> km walked or run today.</p>
+      </article>
+
+      <article class="card">
+        <h2>Sensor temperature</h2>
+        <div class="big"><span id="temp"></span><span class="unit"> °C</span></div>
+        <p class="note">Collar sensor, not body temperature.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Activity score, last 7 days</h2>
+      <div class="chart" id="chart"></div>
+    </section>
+
+    <footer>Demo project · Built with plain HTML, CSS and JavaScript</footer>
+  </main>
+
+  <script>
+    /* ---------- JAVASCRIPT = the behaviour (what the page does) ---------- */
+
+    // 1. DEMO DATA. Edit these numbers and refresh the page to see what changes.
+    const demoData = {
+      week: [
+        { day: "Wed", score: 72 },
+        { day: "Thu", score: 68 },
+        { day: "Fri", score: 75 },
+        { day: "Sat", score: 80 },
+        { day: "Sun", score: 78 },
+        { day: "Mon", score: 70 },
+        { day: "Today", score: 52 }
+      ],
+      restHours: 14.5,
+      steps: 6200,
+      distanceKm: 4.1,
+      sensorTempC: 36.8
+    };
+
+    // 2. Small helper: put text into an element by its id.
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    // 3. Fill in the stat cards.
+    const today = demoData.week[demoData.week.length - 1];
+    setText("score", today.score);
+    setText("rest", demoData.restHours);
+    setText("steps", demoData.steps.toLocaleString() + " steps");
+    setText("distance", demoData.distanceKm);
+    setText("temp", demoData.sensorTempC);
+
+    // 4. Work out the baseline: the average of the 6 days BEFORE today.
+    const previousDays = demoData.week.slice(0, -1);       // everything except the last item
+    let total = 0;
+    for (const entry of previousDays) {
+      total = total + entry.score;
+    }
+    const baseline = Math.round(total / previousDays.length);
+
+    // 5. Compare today with the baseline and choose a message.
+    const difference = today.score - baseline;
+    const percent = Math.round(Math.abs(difference) / baseline * 100);
+    const messageBox = document.getElementById("message");
+
+    if (percent < 10) {
+      setText("message-title", "Max is close to his usual level");
+      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ".");
+    } else if (difference < 0) {
+      messageBox.classList.add("different");
+      setText("message-title", "Max is " + percent + "% less active than usual");
+      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ". Keep an eye on him.");
+    } else {
+      messageBox.classList.add("different");
+      setText("message-title", "Max is " + percent + "% more active than usual");
+      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ".");
+    }
+
+    // 6. Build the 7-day chart: one column per day.
+    const chart = document.getElementById("chart");
+    for (const entry of demoData.week) {
+      const column = document.createElement("div");
+      column.className = "day";
+
+      const value = document.createElement("div");
+      value.className = "day-value";
+      value.textContent = entry.score;
+
+      const bar = document.createElement("div");
+      bar.className = entry.day === "Today" ? "bar today" : "bar";
+      bar.style.height = (entry.score * 1.2) + "px";       // taller score = taller bar
+
+      const label = document.createElement("div");
+      label.className = "day-label";
+      label.textContent = entry.day;
+
+      column.append(value, bar, label);                    // put the pieces inside the column
+      chart.append(column);                                // put the column inside the chart
+    }
+  </script>
+</body>
+</html>
