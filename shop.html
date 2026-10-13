@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PawSense Smart Collar – Shop</title>
+  <meta name="description" content="The PawSense Smart Collar is a prototype designed to help owners understand their pet's usual activity. Join the waitlist.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="PawSense home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#1f3d2f"/>
+          <g fill="#bfe6d3">
+            <ellipse cx="7.5" cy="15" rx="2.4" ry="3"/>
+            <ellipse cx="12.5" cy="10.5" rx="2.4" ry="3.2"/>
+            <ellipse cx="19" cy="14" rx="2.4" ry="3.2"/>
+            <ellipse cx="24.5" cy="18" rx="2.4" ry="3"/>
+            <ellipse cx="15" cy="23" rx="6.5" ry="5"/>
+          </g>
+          <path d="M21 5.5 A6 6 0 0 1 27 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 8.5 A3 3 0 0 1 24 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">PawSense</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="shop.html" aria-current="page">Shop</a></li>
+          <li><a href="dashboard.html">Dashboard Preview</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-secondary btn-small" href="login.html">Log in</a>
+          <a class="btn btn-primary btn-small" href="signup.html">Create Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ========== PRODUCT ========== -->
+    <div class="container shop-grid">
+      <div class="shop-visual">
+        <svg viewBox="0 0 400 340" role="img" aria-labelledby="collar-title collar-desc">
+          <title id="collar-title">PawSense Smart Collar concept illustration</title>
+          <desc id="collar-desc">A forest green collar with a small charcoal sensor module hanging at the front. This is a concept drawing, not a photo of a finished product.</desc>
+          <ellipse cx="200" cy="150" rx="140" ry="105" fill="none" stroke="#1f3d2f" stroke-width="30"/>
+          <ellipse cx="200" cy="150" rx="140" ry="105" fill="none" stroke="#bfe6d3" stroke-width="2.5" stroke-dasharray="7 9"/>
+          <rect x="52" y="118" width="34" height="64" rx="8" fill="#d9d4c5" stroke="#26292a" stroke-width="3"/>
+          <rect x="62" y="132" width="14" height="36" rx="4" fill="none" stroke="#26292a" stroke-width="3"/>
+          <circle cx="200" cy="255" r="14" fill="none" stroke="#d9d4c5" stroke-width="6"/>
+          <rect x="162" y="268" width="76" height="52" rx="14" fill="#26292a"/>
+          <rect x="172" y="278" width="56" height="32" rx="8" fill="#323839"/>
+          <circle cx="200" cy="294" r="6" fill="#7fe0b0"/>
+          <path d="M246 282 A22 22 0 0 1 246 306" fill="none" stroke="#4f9a78" stroke-width="3" stroke-linecap="round"/>
+          <path d="M256 274 A34 34 0 0 1 256 314" fill="none" stroke="#4f9a78" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <p class="stat-note" style="text-align:center">Concept illustration. The final design may differ.</p>
+      </div>
+
+      <div>
+        <span class="pill pill-demo">Prototype, not yet for sale</span>
+        <h1 style="margin-top:0.75rem">PawSense Smart Collar</h1>
+        <p class="lead">A collar with a small motion sensor, designed to help you learn what a normal day looks like for your pet, so changes are easier to notice.</p>
+        <p class="price">Price to be announced</p>
+
+        <button class="btn btn-primary" id="waitlist-btn" aria-expanded="false" aria-controls="waitlist-panel">Join the Waitlist</button>
+
+        <!-- Waitlist form: hidden until the button is pressed (script.js) -->
+        <div class="waitlist-panel card" id="waitlist-panel" hidden>
+          <h2 style="font-size:1.4rem">Join the waitlist</h2>
+          <p class="stat-note" style="margin-top:0">Demo mode: this form does not send or save your email address anywhere.</p>
+          <form id="waitlist-form" novalidate>
+            <div class="field">
+              <label for="wl-email">Email address</label>
+              <input type="email" id="wl-email" autocomplete="email" aria-describedby="wl-email-error">
+              <p class="error" id="wl-email-error" aria-live="polite"></p>
+            </div>
+            <button class="btn btn-primary" type="submit">Get Early Access</button>
+          </form>
+          <p class="form-status" id="waitlist-result" role="status"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========== FEATURES ========== -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-intro">
+          <h2>What it does, and what is still planned</h2>
+          <p class="lead">We label every feature by how far along it is, so nothing here is overstated.</p>
+        </div>
+        <div class="card">
+          <ul class="feature-list">
+            <li><span>Motion and orientation sensing</span> <span class="pill pill-working">Working in prototype</span></li>
+            <li><span>Sensor chip temperature (this is not your pet's body temperature)</span> <span class="pill pill-working">Working in prototype</span></li>
+            <li><span>Daily activity and rest summaries</span> <span class="pill pill-planned">Planned</span></li>
+            <li><span>Comparison with your pet's own usual range</span> <span class="pill pill-planned">Planned</span></li>
+            <li><span>Wireless connection to your account</span> <span class="pill pill-planned">Planned</span></li>
+            <li><span>Personal dashboard with history</span> <span class="pill pill-planned">Planned</span></li>
+            <li><span>Battery life and water resistance</span> <span class="pill pill-planned">Not yet tested</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== WHO IT'S FOR ========== -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <h2>Who it is designed for</h2>
+        <div class="audience-grid">
+          <div class="card"><h3>Curious pet owners</h3><p>People who want to understand their pet's routine better.</p></div>
+          <div class="card"><h3>Routine-minded households</h3><p>Owners who like to keep an eye on how things change over weeks.</p></div>
+          <div class="card"><h3>Early supporters</h3><p>People happy to follow an early prototype and share feedback.</p></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== FAQ ========== -->
+    <section class="section faq" style="padding-top:0">
+      <div class="container" style="max-width:760px">
+        <h2>Questions</h2>
+        <details>
+          <summary>How does it work?</summary>
+          <p>A small motion sensor in the collar measures movement. The idea is to turn that into daily activity and rest summaries, then compare each day with your pet's own usual range. Today, the sensor works on our workbench. The connection to this website is not built yet.</p>
+        </details>
+        <details>
+          <summary>Does it diagnose health problems?</summary>
+          <p>No. PawSense is not a medical device. It is meant to help you notice changes in activity. If you are worried about your pet, please speak to a veterinarian.</p>
+        </details>
+        <details>
+          <summary>When will it be available?</summary>
+          <p>We do not have a release date yet. The product is in development, and we will not guess at one.</p>
+        </details>
+        <details>
+          <summary>Is my email saved if I join the waitlist?</summary>
+          <p>Not in this version. This website is a static prototype with no place to store sign-ups. Saving them for real needs a backend or an external form service, and we will add one before collecting any real addresses.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="logo-text" style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.5rem">PawSense</p>
+          <p>A smart collar for understanding your pet's usual routine. In development.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="dashboard.html">Dashboard Preview</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact and legal</h2>
+          <ul>
+            <li class="placeholder-text">Contact: email address to be added</li>
+            <li class="placeholder-text">Privacy Policy: placeholder, not yet written</li>
+            <li class="placeholder-text">Terms: placeholder, not yet written</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">&copy; <span id="year">2026</span> PawSense (temporary project name). PawSense is an early prototype and is not a medical device. It does not diagnose illness.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Preview – PawSense (demo data)</title>
+  <meta name="description" content="A preview of the PawSense dashboard using made-up demo data.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="PawSense home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#1f3d2f"/>
+          <g fill="#bfe6d3">
+            <ellipse cx="7.5" cy="15" rx="2.4" ry="3"/>
+            <ellipse cx="12.5" cy="10.5" rx="2.4" ry="3.2"/>
+            <ellipse cx="19" cy="14" rx="2.4" ry="3.2"/>
+            <ellipse cx="24.5" cy="18" rx="2.4" ry="3"/>
+            <ellipse cx="15" cy="23" rx="6.5" ry="5"/>
+          </g>
+          <path d="M21 5.5 A6 6 0 0 1 27 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 8.5 A3 3 0 0 1 24 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">PawSense</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="dashboard.html" aria-current="page">Dashboard Preview</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-secondary btn-small" href="login.html">Log in</a>
+          <a class="btn btn-primary btn-small" href="signup.html">Create Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="dash-layout">
+
+      <!-- Dashboard navigation (jumps to sections on this page) -->
+      <nav class="dash-nav" aria-label="Dashboard sections">
+        <a href="#overview">Overview</a>
+        <a href="#activity">Activity</a>
+        <a href="#rest">Rest and movement</a>
+        <a href="#sensor">Sensor status</a>
+        <hr>
+        <a href="index.html">Back to home</a>
+        <a href="shop.html">Visit the shop</a>
+      </nav>
+
+      <div>
+        <p class="dash-banner">DEMO DATA: every number on this page is made up. No collar is connected.</p>
+
+        <div class="dash-grid">
+
+          <section class="card" id="overview" aria-labelledby="profile-title">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">M</div>
+              <div>
+                <h2 id="profile-title" style="font-size:1.6rem">Max</h2>
+                <p>Labrador retriever, 4 years</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="score-title">
+            <h2 id="score-title" style="font-size:1.1rem">Activity score today</h2>
+            <div class="stat-number"><span data-demo="score">52</span><span class="stat-unit"> / 100</span></div>
+            <p class="stat-note">Usual range: <span data-demo="low">64</span> to <span data-demo="high">84</span></p>
+          </section>
+
+          <section class="span-2" aria-label="Change from usual">
+            <p class="baseline-notice" data-notice></p>
+          </section>
+
+          <section class="card span-2" id="activity" aria-labelledby="chart-title">
+            <h2 id="chart-title" style="font-size:1.3rem">Activity score, last 7 days <span class="pill pill-demo">Demo data</span></h2>
+            <div class="chart" data-chart></div>
+            <p class="stat-note">The shaded band is the usual range, worked out from the six days before today.</p>
+          </section>
+
+          <section class="card" id="rest" aria-labelledby="rest-title">
+            <h2 id="rest-title" style="font-size:1.3rem">Rest and activity today</h2>
+            <div class="stat-row"><span>Resting</span><strong>14 h 30 min</strong></div>
+            <div class="stat-row"><span>Light movement</span><strong>7 h 20 min</strong></div>
+            <div class="stat-row"><span>Active</span><strong>2 h 10 min</strong></div>
+          </section>
+
+          <section class="card" aria-labelledby="move-title">
+            <h2 id="move-title" style="font-size:1.3rem">Movement summary</h2>
+            <div class="stat-row"><span>Most active time</span><strong>Morning</strong></div>
+            <div class="stat-row"><span>Movement level</span><strong>Lower than usual</strong></div>
+            <div class="stat-row"><span>Longest rest</span><strong>3 h 45 min</strong></div>
+          </section>
+
+          <section class="card span-2" id="sensor" aria-labelledby="sensor-title">
+            <h2 id="sensor-title" style="font-size:1.3rem">Sensor status</h2>
+            <p><span class="status-dot" aria-hidden="true"></span><strong>Demo mode: collar not connected</strong></p>
+            <div class="stat-row"><span>Sensor chip temperature (demo)</span><strong>28.4 °C</strong></div>
+            <p class="stat-note">This is the temperature of the sensor chip itself. It is not your pet's body temperature and says nothing about their health.</p>
+          </section>
+
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="index.html">Back to home</a>
+          <a class="btn btn-secondary" href="shop.html">Visit the shop</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="logo-text" style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.5rem">PawSense</p>
+          <p>A smart collar for understanding your pet's usual routine. In development.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="dashboard.html">Dashboard Preview</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact and legal</h2>
+          <ul>
+            <li class="placeholder-text">Contact: email address to be added</li>
+            <li class="placeholder-text">Privacy Policy: placeholder, not yet written</li>
+            <li class="placeholder-text">Terms: placeholder, not yet written</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">&copy; <span id="year">2026</span> PawSense (temporary project name). PawSense is an early prototype and is not a medical device. It does not diagnose illness.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

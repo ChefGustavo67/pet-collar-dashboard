@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Account – PawSense (demo)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="PawSense home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#1f3d2f"/>
+          <g fill="#bfe6d3">
+            <ellipse cx="7.5" cy="15" rx="2.4" ry="3"/>
+            <ellipse cx="12.5" cy="10.5" rx="2.4" ry="3.2"/>
+            <ellipse cx="19" cy="14" rx="2.4" ry="3.2"/>
+            <ellipse cx="24.5" cy="18" rx="2.4" ry="3"/>
+            <ellipse cx="15" cy="23" rx="6.5" ry="5"/>
+          </g>
+          <path d="M21 5.5 A6 6 0 0 1 27 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 8.5 A3 3 0 0 1 24 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">PawSense</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="dashboard.html">Dashboard Preview</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-secondary btn-small" href="login.html">Log in</a>
+          <a class="btn btn-primary btn-small" href="signup.html" aria-current="page">Create Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth">
+    <div class="auth-side">
+      <h1>Create your PawSense account</h1>
+      <p>Once the collar is ready, your account will hold your pet's profile and activity history.</p>
+      <p>Right now this page is a visual prototype so you can see how sign-up will feel.</p>
+    </div>
+
+    <div class="auth-main">
+      <div class="auth-card">
+        <h2>Sign up</h2>
+
+        <p class="notice" style="margin-bottom:1.25rem"><strong>Demo mode:</strong> no real account is created. Nothing you type is sent, saved or stored. Please do not enter a real password.</p>
+
+        <form id="signup-form" novalidate>
+          <div class="field">
+            <label for="su-name">Name</label>
+            <input type="text" id="su-name" autocomplete="name" aria-describedby="su-name-error">
+            <p class="error" id="su-name-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="su-email">Email</label>
+            <input type="email" id="su-email" autocomplete="email" aria-describedby="su-email-error">
+            <p class="error" id="su-email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="su-password">Password (at least 8 characters)</label>
+            <div class="password-wrap">
+              <input type="password" id="su-password" autocomplete="new-password" aria-describedby="su-password-error">
+              <button type="button" class="toggle-password" data-target="su-password" aria-label="Show password">Show</button>
+            </div>
+            <p class="error" id="su-password-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="su-confirm">Confirm password</label>
+            <div class="password-wrap">
+              <input type="password" id="su-confirm" autocomplete="new-password" aria-describedby="su-confirm-error">
+              <button type="button" class="toggle-password" data-target="su-confirm" aria-label="Show password">Show</button>
+            </div>
+            <p class="error" id="su-confirm-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <div class="check">
+              <input type="checkbox" id="su-terms" aria-describedby="su-terms-error">
+              <label for="su-terms">I understand this is a demo, and I agree to the Terms and Privacy Policy (both are placeholders and not yet written).</label>
+            </div>
+            <p class="error" id="su-terms-error" aria-live="polite"></p>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Create Account (demo)</button>
+        </form>
+
+        <p class="form-status" id="signup-result" role="status"></p>
+
+        <p class="switch-link">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="logo-text" style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.5rem">PawSense</p>
+          <p>A smart collar for understanding your pet's usual routine. In development.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="dashboard.html">Dashboard Preview</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact and legal</h2>
+          <ul>
+            <li class="placeholder-text">Contact: email address to be added</li>
+            <li class="placeholder-text">Privacy Policy: placeholder, not yet written</li>
+            <li class="placeholder-text">Terms: placeholder, not yet written</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">&copy; <span id="year">2026</span> PawSense (temporary project name). PawSense is an early prototype and is not a medical device. It does not diagnose illness.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

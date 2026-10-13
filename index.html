@@ -2,246 +2,285 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- This line makes the page fit phone screens instead of shrinking -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Max – Pet Health Dashboard</title>
-
-  <style>
-    /* ---------- 1. DESIGN TOKENS ----------
-       Colours and sizes saved as variables so we can reuse them.
-       Change one value here and the whole page updates. */
-    :root {
-      --bg: #eef3f2;
-      --card: #ffffff;
-      --ink: #12302e;
-      --muted: #5d7371;
-      --accent: #1d8a7c;
-      --accent-soft: #d6ece8;
-      --warn: #c9701a;
-      --warn-soft: #fbe9d3;
-      --radius: 16px;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-
-    .page { max-width: 960px; margin: 0 auto; padding: 16px; }
-
-    /* ---------- 2. DEMO BANNER ---------- */
-    .demo-banner {
-      background: var(--warn-soft);
-      color: #7a4208;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-    }
-
-    /* ---------- 3. PROFILE ---------- */
-    .profile { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-    .avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--accent); color: #fff;
-      display: grid; place-items: center;   /* centres the letter */
-      font-size: 1.8rem; font-weight: 700;
-      flex-shrink: 0;
-    }
-    .profile h1 { margin: 0; font-size: 1.8rem; line-height: 1.2; }
-    .profile p { margin: 0; color: var(--muted); }
-
-    /* ---------- 4. CARDS + GRID ----------
-       The grid puts cards in columns. "auto-fit" + "minmax" means:
-       as many columns as fit, each at least 200px wide.
-       On a phone that becomes 1 column automatically. */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .card { background: var(--card); border-radius: var(--radius); padding: 20px; }
-    .card h2 { margin: 0 0 8px; font-size: 0.95rem; color: var(--muted); font-weight: 600; }
-    .big { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
-    .unit { font-size: 1rem; font-weight: 500; color: var(--muted); }
-    .note { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
-
-    /* The one card that matters most gets the accent colour */
-    .score { background: var(--accent); color: #fff; }
-    .score h2, .score .note, .score .unit { color: #d6ece8; }
-
-    /* ---------- 5. BASELINE MESSAGE ---------- */
-    .message {
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      margin-bottom: 16px;
-      background: var(--accent-soft);
-    }
-    .message.different { background: var(--warn-soft); }
-    .message strong { display: block; font-size: 1.1rem; margin-bottom: 2px; }
-
-    /* ---------- 6. CHART ----------
-       Each day is a column (a flex box). The bar's height is set
-       by JavaScript as a percentage. */
-    .chart {
-      display: flex;
-      align-items: flex-end;     /* bars grow upward from the bottom */
-      gap: 8px;
-      height: 180px;
-      margin-top: 12px;
-    }
-    .day { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-    .bar { width: 100%; max-width: 48px; background: var(--accent-soft); border-radius: 8px 8px 0 0; }
-    .bar.today { background: var(--accent); }
-    .day-value { font-size: 0.8rem; margin-bottom: 4px; }
-    .day-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
-
-    footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 16px 0; }
-  </style>
+  <title>PawSense – Understand your pet's everyday patterns</title>
+  <meta name="description" content="PawSense is a smart pet collar in development, designed to help owners follow their pet's activity and notice changes from their usual routine.">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <!-- ---------- HTML = the structure (the content on the page) ---------- -->
-  <main class="page">
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-    <div class="demo-banner">DEMO DATA – these numbers are made up, not real sensor readings.</div>
+  <!-- ========== HEADER (the same on every page) ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="PawSense home">
+        <!-- Logo mark: a paw with a small signal arc, drawn as inline SVG (no image file needed) -->
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#1f3d2f"/>
+          <g fill="#bfe6d3">
+            <ellipse cx="7.5" cy="15" rx="2.4" ry="3"/>
+            <ellipse cx="12.5" cy="10.5" rx="2.4" ry="3.2"/>
+            <ellipse cx="19" cy="14" rx="2.4" ry="3.2"/>
+            <ellipse cx="24.5" cy="18" rx="2.4" ry="3"/>
+            <ellipse cx="15" cy="23" rx="6.5" ry="5"/>
+          </g>
+          <path d="M21 5.5 A6 6 0 0 1 27 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 8.5 A3 3 0 0 1 24 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">PawSense</span>
+      </a>
 
-    <section class="profile">
-      <div class="avatar" aria-hidden="true">M</div>
-      <div>
-        <h1>Max</h1>
-        <p>Labrador · 4 years old · Collar demo-001</p>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="dashboard.html">Dashboard Preview</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-secondary btn-small" href="login.html">Log in</a>
+          <a class="btn btn-primary btn-small" href="signup.html">Create Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ========== A. HERO ========== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Understand your pet's everyday patterns.</h1>
+          <p class="lead">PawSense is a smart collar we are developing to help owners follow their pet's activity and notice changes from their usual routine.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="shop.html">Explore the Collar</a>
+            <a class="btn btn-secondary" href="signup.html">Create Your Account</a>
+          </div>
+          <p class="status-line">Early prototype. The collar is not for sale yet.</p>
+        </div>
+
+        <!-- Product illustration drawn with SVG (a concept drawing, not a photo) -->
+        <div class="hero-visual">
+          <svg viewBox="0 0 400 340" role="img" aria-labelledby="collar-title collar-desc">
+            <title id="collar-title">PawSense collar concept illustration</title>
+            <desc id="collar-desc">A forest green collar with a small charcoal sensor module hanging at the front. This is a concept drawing, not a photo of a finished product.</desc>
+            <!-- strap -->
+            <ellipse cx="200" cy="150" rx="140" ry="105" fill="none" stroke="#1f3d2f" stroke-width="30"/>
+            <!-- stitching -->
+            <ellipse cx="200" cy="150" rx="140" ry="105" fill="none" stroke="#bfe6d3" stroke-width="2.5" stroke-dasharray="7 9"/>
+            <!-- buckle -->
+            <rect x="52" y="118" width="34" height="64" rx="8" fill="#d9d4c5" stroke="#26292a" stroke-width="3"/>
+            <rect x="62" y="132" width="14" height="36" rx="4" fill="none" stroke="#26292a" stroke-width="3"/>
+            <!-- ring and sensor module -->
+            <circle cx="200" cy="255" r="14" fill="none" stroke="#d9d4c5" stroke-width="6"/>
+            <rect x="162" y="268" width="76" height="52" rx="14" fill="#26292a"/>
+            <rect x="172" y="278" width="56" height="32" rx="8" fill="#323839"/>
+            <circle cx="200" cy="294" r="6" fill="#7fe0b0"/>
+            <!-- small signal arcs -->
+            <path d="M246 282 A22 22 0 0 1 246 306" fill="none" stroke="#4f9a78" stroke-width="3" stroke-linecap="round"/>
+            <path d="M256 274 A34 34 0 0 1 256 314" fill="none" stroke="#4f9a78" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+
+          <div class="demo-chip">
+            <span class="pill pill-demo">Demo data</span>
+            <strong>Max, today</strong>
+            <span>Activity score <span data-demo="score">52</span>, usual range <span data-demo="low">64</span> to <span data-demo="high">84</span></span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Message comparing today with the usual baseline (text is filled in by JavaScript) -->
-    <section class="message" id="message" aria-live="polite">
-      <strong id="message-title">Loading…</strong>
-      <span id="message-text"></span>
+
+    <!-- ========== C. HOW IT WORKS ========== -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-intro">
+          <h2>How it works</h2>
+          <p class="lead">Three steps from collar to insight, once the product is built.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="card">
+            <h3>Fit the collar to your pet</h3>
+            <p>Adjust the strap so the sensor sits comfortably at the front of your pet's neck.</p>
+          </li>
+          <li class="card">
+            <h3>Collect activity and movement data</h3>
+            <p>A small motion sensor records how your pet moves and rests through the day.</p>
+          </li>
+          <li class="card">
+            <h3>Explore trends and changes</h3>
+            <p>Your pet's personal dashboard compares today with their own usual routine.</p>
+          </li>
+        </ol>
+
+        <p class="notice"><strong>Where we are today:</strong> our prototype can measure movement and orientation on the workbench. Connecting a collar to your account and collecting data from your pet at home are still in development.</p>
+      </div>
     </section>
 
-    <!-- The four stat cards. Numbers are filled in by JavaScript too. -->
-    <section class="grid">
-      <article class="card score">
-        <h2>Activity score today</h2>
-        <div class="big"><span id="score"></span><span class="unit"> / 100</span></div>
-        <p class="note">Higher means more active.</p>
-      </article>
 
-      <article class="card">
-        <h2>Rest time</h2>
-        <div class="big"><span id="rest"></span><span class="unit"> hrs</span></div>
-        <p class="note">Time lying still today.</p>
-      </article>
-
-      <article class="card">
-        <h2>Movement</h2>
-        <div class="big"><span id="steps"></span></div>
-        <p class="note"><span id="distance"></span> km walked or run today.</p>
-      </article>
-
-      <article class="card">
-        <h2>Sensor temperature</h2>
-        <div class="big"><span id="temp"></span><span class="unit"> °C</span></div>
-        <p class="note">Collar sensor, not body temperature.</p>
-      </article>
+    <!-- ========== D. KEY BENEFITS ========== -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-intro">
+          <h2>What PawSense is designed to help with</h2>
+          <p class="lead">These are the goals we are building towards, not guarantees.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="card benefit-card">
+            <h3>Understand daily activity patterns</h3>
+            <p>See when your pet tends to be active and when they rest.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Explore changes over time</h3>
+            <p>Look back over days and weeks to see how routines shift.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Build a picture of their usual routine</h3>
+            <p>Every pet is different, so comparisons are made against your own pet.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Keep pet information organized</h3>
+            <p>One place for your pet's profile and activity history.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Activity score, last 7 days</h2>
-      <div class="chart" id="chart"></div>
+
+    <!-- ========== E. DASHBOARD PREVIEW ========== -->
+    <section class="section preview-band" id="preview">
+      <div class="container">
+        <div class="section-intro">
+          <h2>A look at the dashboard</h2>
+          <p class="lead">This is a mock-up with made-up numbers, to show the idea. It is not connected to a collar.</p>
+        </div>
+
+        <div class="preview-grid">
+          <div class="card">
+            <div class="preview-top">
+              <div class="profile">
+                <div class="avatar" aria-hidden="true">M</div>
+                <div>
+                  <h3>Max</h3>
+                  <p>Labrador retriever, 4 years</p>
+                </div>
+              </div>
+              <span class="pill pill-demo">Demo data</span>
+            </div>
+            <p class="stat-note">Activity score today</p>
+            <div class="stat-number"><span data-demo="score">52</span><span class="stat-unit"> / 100</span></div>
+            <div class="stat-row" style="margin-top:1rem"><span>Rest</span><strong>14 h 30 min</strong></div>
+            <div class="stat-row"><span>Active</span><strong>2 h 10 min</strong></div>
+          </div>
+
+          <div class="card">
+            <div class="preview-top">
+              <h3>Activity score, last 7 days</h3>
+              <span class="pill pill-demo">Demo data</span>
+            </div>
+            <div class="chart" data-chart></div>
+            <p class="baseline-notice" data-notice style="margin:1rem 0 0"></p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="dashboard.html">Open the full dashboard preview</a>
+        </div>
+      </div>
     </section>
 
-    <footer>Demo project · Built with plain HTML, CSS and JavaScript</footer>
+
+    <!-- ========== F. PRODUCT SECTION ========== -->
+    <section class="section product-band">
+      <div class="container">
+        <h2>The PawSense Smart Collar</h2>
+        <p class="lead">A lightweight collar with a small sensor module, designed around one idea: knowing what is normal for your pet makes changes easier to notice.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="shop.html">See the Smart Collar</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== G. TRUST AND TRANSPARENCY ========== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-intro">
+          <h2>Honest about where we are</h2>
+          <p class="lead">PawSense is an early project. Here is what that means.</p>
+        </div>
+        <div class="trust-grid">
+          <div class="card">
+            <h3>PawSense is designed for</h3>
+            <ul>
+              <li>Activity awareness: seeing your pet's usual patterns.</li>
+              <li>Spotting changes from your pet's own baseline.</li>
+              <li>Giving you something concrete to talk about with your vet.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>PawSense is not</h3>
+            <ul>
+              <li>A medical device.</li>
+              <li>A way to diagnose illness or replace a veterinarian.</li>
+              <li>Available to buy yet. The product is in development.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== H. FINAL CALL TO ACTION ========== -->
+    <section class="section final-cta" style="padding-top:0">
+      <div class="container">
+        <h2>Follow the project</h2>
+        <p class="lead">Explore the collar concept, or create a demo account to see how sign-up will feel.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="shop.html">Explore the Collar</a>
+          <a class="btn btn-secondary" href="signup.html">Create Account</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <script>
-    /* ---------- JAVASCRIPT = the behaviour (what the page does) ---------- */
 
-    // 1. DEMO DATA. Edit these numbers and refresh the page to see what changes.
-    const demoData = {
-      week: [
-        { day: "Wed", score: 72 },
-        { day: "Thu", score: 68 },
-        { day: "Fri", score: 75 },
-        { day: "Sat", score: 80 },
-        { day: "Sun", score: 78 },
-        { day: "Mon", score: 70 },
-        { day: "Today", score: 52 }
-      ],
-      restHours: 14.5,
-      steps: 6200,
-      distanceKm: 4.1,
-      sensorTempC: 36.8
-    };
+  <!-- ========== I. FOOTER (the same on every page) ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="logo-text" style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.5rem">PawSense</p>
+          <p>A smart collar for understanding your pet's usual routine. In development.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="dashboard.html">Dashboard Preview</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact and legal</h2>
+          <ul>
+            <li class="placeholder-text">Contact: email address to be added</li>
+            <li class="placeholder-text">Privacy Policy: placeholder, not yet written</li>
+            <li class="placeholder-text">Terms: placeholder, not yet written</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">&copy; <span id="year">2026</span> PawSense (temporary project name). PawSense is an early prototype and is not a medical device. It does not diagnose illness.</p>
+    </div>
+  </footer>
 
-    // 2. Small helper: put text into an element by its id.
-    function setText(id, value) {
-      document.getElementById(id).textContent = value;
-    }
-
-    // 3. Fill in the stat cards.
-    const today = demoData.week[demoData.week.length - 1];
-    setText("score", today.score);
-    setText("rest", demoData.restHours);
-    setText("steps", demoData.steps.toLocaleString() + " steps");
-    setText("distance", demoData.distanceKm);
-    setText("temp", demoData.sensorTempC);
-
-    // 4. Work out the baseline: the average of the 6 days BEFORE today.
-    const previousDays = demoData.week.slice(0, -1);       // everything except the last item
-    let total = 0;
-    for (const entry of previousDays) {
-      total = total + entry.score;
-    }
-    const baseline = Math.round(total / previousDays.length);
-
-    // 5. Compare today with the baseline and choose a message.
-    const difference = today.score - baseline;
-    const percent = Math.round(Math.abs(difference) / baseline * 100);
-    const messageBox = document.getElementById("message");
-
-    if (percent < 10) {
-      setText("message-title", "Max is close to his usual level");
-      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ".");
-    } else if (difference < 0) {
-      messageBox.classList.add("different");
-      setText("message-title", "Max is " + percent + "% less active than usual");
-      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ". Keep an eye on him.");
-    } else {
-      messageBox.classList.add("different");
-      setText("message-title", "Max is " + percent + "% more active than usual");
-      setText("message-text", "Today's score is " + today.score + " and his usual is " + baseline + ".");
-    }
-
-    // 6. Build the 7-day chart: one column per day.
-    const chart = document.getElementById("chart");
-    for (const entry of demoData.week) {
-      const column = document.createElement("div");
-      column.className = "day";
-
-      const value = document.createElement("div");
-      value.className = "day-value";
-      value.textContent = entry.score;
-
-      const bar = document.createElement("div");
-      bar.className = entry.day === "Today" ? "bar today" : "bar";
-      bar.style.height = (entry.score * 1.2) + "px";       // taller score = taller bar
-
-      const label = document.createElement("div");
-      label.className = "day-label";
-      label.textContent = entry.day;
-
-      column.append(value, bar, label);                    // put the pieces inside the column
-      chart.append(column);                                // put the column inside the chart
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

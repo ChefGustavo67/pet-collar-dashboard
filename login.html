@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in – PawSense (demo)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="PawSense home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#1f3d2f"/>
+          <g fill="#bfe6d3">
+            <ellipse cx="7.5" cy="15" rx="2.4" ry="3"/>
+            <ellipse cx="12.5" cy="10.5" rx="2.4" ry="3.2"/>
+            <ellipse cx="19" cy="14" rx="2.4" ry="3.2"/>
+            <ellipse cx="24.5" cy="18" rx="2.4" ry="3"/>
+            <ellipse cx="15" cy="23" rx="6.5" ry="5"/>
+          </g>
+          <path d="M21 5.5 A6 6 0 0 1 27 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 8.5 A3 3 0 0 1 24 11.5" fill="none" stroke="#bfe6d3" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">PawSense</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="dashboard.html">Dashboard Preview</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-secondary btn-small" href="login.html" aria-current="page">Log in</a>
+          <a class="btn btn-primary btn-small" href="signup.html">Create Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth">
+    <div class="auth-side">
+      <h1>Welcome back</h1>
+      <p>Log in to see your pet's dashboard.</p>
+      <p>Log-in is not connected yet, so this page is a visual prototype. You can look at the dashboard idea any time on the preview page.</p>
+    </div>
+
+    <div class="auth-main">
+      <div class="auth-card">
+        <h2>Log in</h2>
+
+        <p class="notice" style="margin-bottom:1.25rem"><strong>Demo mode:</strong> there are no real accounts yet. Nothing you type is sent, saved or stored. Please do not enter a real password.</p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="li-email">Email</label>
+            <input type="email" id="li-email" autocomplete="email" aria-describedby="li-email-error">
+            <p class="error" id="li-email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="li-password">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="li-password" autocomplete="current-password" aria-describedby="li-password-error">
+              <button type="button" class="toggle-password" data-target="li-password" aria-label="Show password">Show</button>
+            </div>
+            <p class="error" id="li-password-error" aria-live="polite"></p>
+          </div>
+
+          <div class="form-links">
+            <div class="check">
+              <input type="checkbox" id="li-remember">
+              <label for="li-remember">Remember me</label>
+            </div>
+            <a href="#" id="forgot-link">Forgot password?</a>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Log in (demo)</button>
+        </form>
+
+        <p class="form-status" id="login-result" role="status"></p>
+
+        <p class="switch-link">New here? <a href="signup.html">Create an account</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="logo-text" style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.5rem">PawSense</p>
+          <p>A smart collar for understanding your pet's usual routine. In development.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="dashboard.html">Dashboard Preview</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact and legal</h2>
+          <ul>
+            <li class="placeholder-text">Contact: email address to be added</li>
+            <li class="placeholder-text">Privacy Policy: placeholder, not yet written</li>
+            <li class="placeholder-text">Terms: placeholder, not yet written</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-note">&copy; <span id="year">2026</span> PawSense (temporary project name). PawSense is an early prototype and is not a medical device. It does not diagnose illness.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
